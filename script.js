@@ -1,130 +1,326 @@
 /* ============================================================
    Chatbot demo · Iberdrola × Carrefour
-   Dos pantallas: bienvenida con CTAs + chat con respuestas.
+   Versión ampliada con procedimiento detallado y más dudas.
    ============================================================ */
+
+// ---------- Enlaces oficiales centralizados ----------
+const LINKS = {
+  promo: "https://www.iberdrola.es/informacion/carrefour",
+  vincular: "https://www.carrefour.es/iberdrola",
+  iberdrola: "https://www.iberdrola.es",
+  carrefour: "https://www.carrefour.es",
+  tiendas: "https://www.carrefour.es/tiendas",
+  privacidad: "https://www.iberdrola.es/politica-privacidad",
+  appClub: "https://www.carrefour.es/club"
+};
 
 // ---------- Base de conocimiento ----------
 const knowledgeBase = [
+
+  // ============ PROCEDIMIENTO COMPLETO ============
   {
-    id: "colaboracion",
+    id: "procedimiento",
     keywords: [
-      "colaboracion", "alianza", "acuerdo", "que es", "de que trata",
-      "en que consiste", "iberdrola carrefour", "carrefour iberdrola",
-      "promocion", "promo", "oferta", "ventajas", "beneficios", "que ofrece"
+      "procedimiento", "como funciona", "pasos", "paso a paso", "como se hace",
+      "que tengo que hacer", "que hago", "como empiezo", "por donde empiezo",
+      "guia", "explicame", "como va", "como va esto", "como va la promocion",
+      "que tengo que hacer primero"
     ],
     answer: `
-      <strong>¡Bienvenido a la alianza Iberdrola × Carrefour!</strong><br><br>
-      Si contratas la <strong>luz o el gas con Iberdrola</strong> y eres <strong>socio del Club Carrefour</strong>, disfrutas de ventajas exclusivas:
-      <ul>
-        <li>💰 <strong>Hasta un 6% de acumulación</strong> en tu Cheque Ahorro Carrefour por tu consumo de energía.</li>
-        <li>🎁 <strong>Tarjeta regalo Carrefour</strong> al contratar (consulta el importe vigente).</li>
-        <li>⚡ Energía 100% verde de origen renovable certificado.</li>
-      </ul>
-      Necesitas tres pasos: <strong>contratar con Iberdrola</strong>, <strong>ser socio del Club</strong> y <strong>vincular ambos contratos</strong>.
+      <strong>Cómo funciona la promoción, paso a paso</strong> 📝<br><br>
+
+      <strong>1️⃣ Hazte socio del Club Carrefour</strong> (gratis)<br>
+      Descárgate la app Mi Club Carrefour o date de alta en cualquier hipermercado. Recibirás tu número de socio.<br><br>
+
+      <strong>2️⃣ Contrata la luz o el gas con Iberdrola</strong><br>
+      Elige el <em>Plan Online Carrefour</em> desde <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a>, llamando al 900 22 45 22 o en el stand del Carrefour.<br><br>
+
+      <strong>3️⃣ Vincula los dos contratos</strong><br>
+      Entra en <a href="${LINKS.vincular}" target="_blank" rel="noopener">carrefour.es/iberdrola</a>, introduce tu número de socio del Club y los datos de tu contrato de Iberdrola.<br><br>
+
+      <strong>4️⃣ Empieza a ahorrar automáticamente</strong> 💰<br>
+      Cada vez que pagues tu factura, se acumulará <strong>hasta un 6%</strong> en tu Cheque Ahorro Carrefour. Sin hacer nada más.<br><br>
+
+      ¿Quieres que te detalle alguno de los pasos?
     `
   },
   {
-    id: "socio",
+    id: "paso1_socio",
     keywords: [
-      "socio", "hacerme socio", "club carrefour", "alta club", "registrarme",
-      "registrar", "darme alta", "darme de alta", "club", "tarjeta club",
-      "como ser socio", "hacerme del club", "ser del club", "apuntarme"
+      "paso 1", "primer paso", "primero", "empezar", "como me apunto",
+      "como me hago socio", "alta club", "hacerme socio"
     ],
     answer: `
-      <strong>Hacerte socio del Club Carrefour es gratis y rápido</strong> 🛒<br><br>
-      Tienes dos opciones:
+      <strong>Paso 1: Hazte socio del Club Carrefour</strong> 🛒<br><br>
+      Es <strong>gratis</strong> y tienes dos formas:<br>
       <ul>
         <li>📱 Desde la <strong>app Mi Club Carrefour</strong> (Android e iOS).</li>
         <li>🏬 En el <strong>punto de atención al cliente</strong> de cualquier hipermercado Carrefour.</li>
       </ul>
-      Al darte de alta recibirás tu <strong>tarjeta digital del Club</strong>, que necesitarás para vincularla con tu contrato de Iberdrola.
+      Cuando termines tendrás tu <strong>número de socio</strong> (lo necesitarás en el paso 3 para vincular).<br><br>
+      Más info: <a href="${LINKS.appClub}" target="_blank" rel="noopener">carrefour.es/club</a>
     `
   },
   {
-    id: "vincular",
+    id: "paso2_contratar",
     keywords: [
-      "vincular", "vinculacion", "enlazar", "unir", "asociar", "conectar contrato",
-      "como vinculo", "vincular contrato", "vincular cuentas", "unir contrato",
-      "juntar", "asociar contrato"
+      "paso 2", "segundo paso", "como contrato", "contratar luz",
+      "contratar gas", "darme alta iberdrola", "como contratar"
     ],
     answer: `
-      <strong>Cómo vincular tu contrato Iberdrola con el Club Carrefour</strong> 🔗<br><br>
+      <strong>Paso 2: Contrata con Iberdrola</strong> ⚡<br><br>
+      Elige la opción que prefieras:<br>
       <ul>
-        <li>1️⃣ Entra en <a href="https://www.carrefour.es/iberdrola" target="_blank" rel="noopener">carrefour.es/iberdrola</a>.</li>
-        <li>2️⃣ Introduce tu <strong>número de socio</strong> del Club Carrefour.</li>
-        <li>3️⃣ Añade los datos de tu <strong>contrato de Iberdrola</strong> (CUPS o número de contrato).</li>
-        <li>4️⃣ Confirma la vinculación.</li>
+        <li>🌐 Online: <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a></li>
+        <li>📞 Teléfono: <strong>900 22 45 22</strong></li>
+        <li>🏬 En el <strong>stand de Iberdrola</strong> dentro del Carrefour</li>
       </ul>
-      A partir de ese momento, tu <strong>acumulación se cargará automáticamente</strong> en tu Cheque Ahorro Carrefour.
+      <strong>Lo que necesitas tener a mano:</strong><br>
+      <ul>
+        <li>🪪 DNI</li>
+        <li>🏦 IBAN (para domiciliar la factura)</li>
+        <li>📄 Factura reciente o el CUPS de tu suministro actual</li>
+      </ul>
+      No tienes que llamar a tu compañía actual: <strong>Iberdrola gestiona el cambio</strong> por ti.
     `
   },
+  {
+    id: "paso3_vincular",
+    keywords: [
+      "paso 3", "tercer paso", "como vinculo", "vincular contratos",
+      "vincular cuentas", "unir", "asociar", "enlazar"
+    ],
+    answer: `
+      <strong>Paso 3: Vincula los dos contratos</strong> 🔗<br><br>
+      Ve a <a href="${LINKS.vincular}" target="_blank" rel="noopener">carrefour.es/iberdrola</a> e introduce:<br>
+      <ul>
+        <li>1️⃣ Tu <strong>número de socio del Club Carrefour</strong></li>
+        <li>2️⃣ El <strong>CUPS o número de contrato de Iberdrola</strong></li>
+        <li>3️⃣ Confirmas la vinculación</li>
+      </ul>
+      A partir de ese momento, <strong>todo es automático</strong>. No tienes que hacer nada más cada mes: la acumulación se carga sola en tu Cheque Ahorro Carrefour.
+    `
+  },
+  {
+    id: "paso4_ahorro",
+    keywords: [
+      "paso 4", "cuarto paso", "cuando ahorro", "cuando empiezo a ahorrar",
+      "cuando se aplica", "cuando se ve"
+    ],
+    answer: `
+      <strong>Paso 4: Empieza a ahorrar</strong> 💰<br><br>
+      Una vez vinculados los contratos, <strong>cada vez que pagues tu factura</strong> de luz o gas, se acumulará automáticamente <strong>hasta un 6%</strong> en tu <strong>Cheque Ahorro Carrefour</strong>.<br><br>
+      Lo puedes consultar:<br>
+      <ul>
+        <li>📱 En la <strong>app Mi Club Carrefour</strong></li>
+        <li>🧾 En el <strong>ticket de tu próxima compra</strong> en Carrefour</li>
+      </ul>
+      Ese cheque se canjea en cualquier centro Carrefour: hipermercados, supermercados, gasolineras y la web.
+    `
+  },
+
+  // ============ DUDAS FRECUENTES ============
+  {
+    id: "es_gratis",
+    keywords: [
+      "es gratis", "cuesta", "tiene coste", "tengo que pagar", "pagar algo",
+      "tiene comisiones", "es de pago", "pago extra"
+    ],
+    answer: `
+      ✅ <strong>Sí, la promoción es totalmente gratuita</strong>.<br><br>
+      No tienes que pagar nada extra por:<br>
+      <ul>
+        <li>🛒 Hacerte socio del Club Carrefour</li>
+        <li>🔗 Vincular tu contrato</li>
+        <li>💳 Recibir el Cheque Ahorro</li>
+      </ul>
+      Solo pagas tu factura normal de luz o gas, y a cambio acumulas <strong>hasta un 6%</strong> en Cheque Ahorro Carrefour.
+    `
+  },
+  {
+    id: "ya_soy_cliente",
+    keywords: [
+      "ya soy cliente", "ya tengo iberdrola", "ya estoy con iberdrola",
+      "ya soy de iberdrola", "soy cliente", "ya tengo contrato"
+    ],
+    answer: `
+      ¡Perfecto, mejor todavía! 👌<br><br>
+      Si <strong>ya tienes luz o gas con Iberdrola</strong>, no necesitas cambiar nada. Solo tienes que:<br>
+      <ul>
+        <li>1️⃣ Hacerte socio del <strong>Club Carrefour</strong> (si aún no lo eres).</li>
+        <li>2️⃣ Entrar en <a href="${LINKS.vincular}" target="_blank" rel="noopener">carrefour.es/iberdrola</a> y <strong>vincular ambos contratos</strong>.</li>
+      </ul>
+      Comprueba en tu factura actual que tienes el <strong>Plan Online Carrefour</strong>. Si no, puedes cambiarte a esta tarifa llamando al <strong>900 22 45 22</strong>.
+    `
+  },
+  {
+    id: "ya_soy_socio",
+    keywords: [
+      "ya soy socio", "ya tengo club", "ya soy del club", "ya tengo la tarjeta club"
+    ],
+    answer: `
+      ¡Perfecto! Ya tienes la mitad hecha. 😊<br><br>
+      Solo te quedan dos pasos:<br>
+      <ul>
+        <li>1️⃣ <strong>Contrata la luz o el gas con Iberdrola</strong> en <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a> o en el stand del Carrefour.</li>
+        <li>2️⃣ <strong>Vincula ambos contratos</strong> en <a href="${LINKS.vincular}" target="_blank" rel="noopener">carrefour.es/iberdrola</a> con tu número de socio.</li>
+      </ul>
+      Y empezarás a acumular en tu Cheque Ahorro automáticamente. 💰
+    `
+  },
+  {
+    id: "suben_precio",
+    keywords: [
+      "suben precio", "sube precio", "me suben", "precio fijo", "precio variable",
+      "cambia precio", "encarece", "engaño"
+    ],
+    answer: `
+      🔒 La tarifa <strong>Plan Online Carrefour</strong> de Iberdrola se mantiene durante el periodo contratado según las condiciones que aceptes.<br><br>
+      Como cualquier tarifa de luz/gas, está sujeta a posibles revisiones legales o de mercado, pero <strong>Iberdrola siempre te avisa con antelación</strong> de cualquier cambio.<br><br>
+      Recuerda que <strong>no hay permanencia</strong>: puedes irte cuando quieras sin penalización.<br><br>
+      Consulta los precios actualizados en <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a>.
+    `
+  },
+  {
+    id: "permanencia",
+    keywords: [
+      "permanencia", "compromiso", "tiempo minimo", "cuanto dura",
+      "obliga", "obligatorio", "atado", "amarrado", "puedo dejarlo",
+      "puedo cancelar"
+    ],
+    answer: `
+      📄 La tarifa de esta promoción <strong>no tiene permanencia</strong>.<br><br>
+      Puedes darte de baja cuando quieras sin penalización:<br>
+      <ul>
+        <li>📞 Llamando al <strong>900 100 270</strong></li>
+        <li>📱 Desde la app <strong>Mi Iberdrola</strong></li>
+      </ul>
+    `
+  },
+  {
+    id: "cambio_banco",
+    keywords: [
+      "cambiar banco", "cambiar cuenta", "domiciliar", "domiciliacion",
+      "cuenta bancaria", "iban", "tengo que cambiar banco"
+    ],
+    answer: `
+      🏦 <strong>No tienes que cambiar de banco</strong>.<br><br>
+      Solo necesitas un <strong>IBAN</strong> (de cualquier banco español) donde quieras que se domicilien las facturas de Iberdrola. La domiciliación es gratuita y se gestiona en el momento de contratar.
+    `
+  },
+  {
+    id: "corte_luz",
+    keywords: [
+      "me cortan", "cortan la luz", "queda sin luz", "se queda sin luz",
+      "interrupcion", "cambio de compañia", "el cambio", "transicion"
+    ],
+    answer: `
+      ⚡ <strong>No, no te quedas sin luz ni un solo minuto</strong>.<br><br>
+      El cambio de compañía es 100% administrativo: <strong>Iberdrola se encarga de todo</strong> con tu compañía actual. Tarda entre 15 y 21 días, y durante ese tiempo tienes el suministro como siempre.
+    `
+  },
+  {
+    id: "donde_se_aplica",
+    keywords: [
+      "que comunidades", "donde aplica", "donde funciona", "en mi ciudad",
+      "donde puedo", "valido en", "disponible en"
+    ],
+    answer: `
+      🌍 La promoción <strong>Iberdrola × Carrefour</strong> está disponible en <strong>toda España peninsular y Baleares</strong>, en cualquier hogar con suministro de luz y/o gas.<br><br>
+      Para localizar el Carrefour más cercano con stand de Iberdrola: <a href="${LINKS.tiendas}" target="_blank" rel="noopener">carrefour.es/tiendas</a>.
+    `
+  },
+  {
+    id: "alquiler",
+    keywords: [
+      "alquiler", "vivo de alquiler", "soy inquilino", "casa alquilada",
+      "no es mi casa", "piso alquilado"
+    ],
+    answer: `
+      🏠 <strong>Sí, puedes contratar la promoción aunque vivas de alquiler</strong>.<br><br>
+      Solo necesitas que el contrato de suministro esté <strong>a tu nombre</strong> (o cambiarlo a tu nombre con un titular previo).<br><br>
+      Si tienes dudas con el cambio de titularidad, te lo gestionan en el stand del Carrefour o llamando al <strong>900 22 45 22</strong>.
+    `
+  },
+
+  // ============ AHORRO Y TARJETA REGALO ============
   {
     id: "ahorro",
     keywords: [
       "cuanto ahorro", "ahorro", "ahorrar", "porcentaje", "acumulacion",
-      "cuanto acumulo", "cheque ahorro", "cheque", "descuento", "rebaja"
+      "cuanto acumulo", "cheque ahorro", "cheque", "descuento", "rebaja",
+      "cuanto me devuelven"
     ],
     answer: `
-      <strong>Acumulación en tu Cheque Ahorro Carrefour</strong> 💰<br><br>
-      Con la tarifa Plan Online Carrefour de Iberdrola puedes acumular <strong>hasta un 6%</strong> del consumo de tu factura de luz y gas en tu Cheque Ahorro.<br><br>
-      Ese cheque se canjea en <strong>cualquier centro Carrefour</strong> (híper, súper, gasolineras o web).
+      💰 <strong>Hasta un 6% de acumulación</strong> en tu Cheque Ahorro Carrefour por el consumo de tu factura de luz y gas.<br><br>
+      Ejemplo orientativo: si pagas <strong>100€</strong> de factura, acumulas hasta <strong>6€</strong> en cheque para gastar en Carrefour.<br><br>
+      Es <strong>automático</strong>: cada vez que pagas tu factura, se carga la acumulación. Sin papeles, sin reclamarlo, sin esperar.<br><br>
+      Más detalles en <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a>.
     `
   },
   {
     id: "tarjeta_regalo",
-    keywords: ["tarjeta regalo", "regalo", "cheque regalo", "tarjeta", "bono", "vale"],
+    keywords: [
+      "tarjeta regalo", "regalo", "cheque regalo", "tarjeta", "bono", "vale",
+      "que regalo me dan"
+    ],
     answer: `
-      <strong>Tarjeta regalo Carrefour</strong> 🎁<br><br>
-      Si contratas la luz o el gas con Iberdrola dentro de la promoción, recibirás una <strong>tarjeta regalo Carrefour</strong> para gastar en cualquier centro Carrefour.<br><br>
-      La tarjeta te llegará <strong>de forma digital a tu correo electrónico</strong> y se activará en unos días.
+      🎁 Al contratar dentro de la promoción recibes una <strong>tarjeta regalo Carrefour</strong> para gastar en cualquier centro Carrefour.<br><br>
+      <strong>Cómo te llega:</strong><br>
+      <ul>
+        <li>📧 De forma <strong>digital a tu correo electrónico</strong>.</li>
+        <li>⏱️ Se <strong>activa a los 15 días</strong> de haber contratado.</li>
+      </ul>
+      Consulta el <strong>importe vigente</strong> en <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a>.
     `
   },
   {
     id: "donde_canjear",
     keywords: [
       "donde canjear", "donde gastar", "donde uso", "donde usar", "canjear",
-      "gastar cheque", "usar cheque", "donde se gasta"
+      "gastar cheque", "usar cheque", "donde se gasta", "donde lo puedo gastar"
     ],
     answer: `
-      Tu Cheque Ahorro y tu tarjeta regalo Carrefour se pueden gastar en:
+      Tu Cheque Ahorro y tu tarjeta regalo Carrefour se pueden gastar en:<br>
       <ul>
         <li>🏬 <strong>Hipermercados y supermercados Carrefour</strong></li>
         <li>⛽ <strong>Gasolineras Carrefour</strong></li>
         <li>🌐 <strong>Carrefour.es</strong> (compra online)</li>
         <li>🛍️ Tiendas <strong>Carrefour Market y Express</strong></li>
       </ul>
+      Encuentra tu Carrefour más cercano: <a href="${LINKS.tiendas}" target="_blank" rel="noopener">carrefour.es/tiendas</a>.
     `
   },
   {
-    id: "cuando_recibo",
+    id: "caduca",
     keywords: [
-      "cuando recibo", "cuando llega", "cuanto tarda", "plazo", "cuando me dan",
-      "cuando lo cobro", "cuando se activa"
+      "caduca", "caducidad", "vence", "expira", "cuanto tiempo",
+      "tiempo limite", "validez", "fecha limite"
     ],
     answer: `
-      ⏱️ Los plazos habituales son:
-      <ul>
-        <li>📧 <strong>Tarjeta regalo</strong>: la recibes por email en pocos días tras contratar y se <strong>activa a los 15 días</strong>.</li>
-        <li>💳 <strong>Acumulación en Cheque Ahorro</strong>: se carga automáticamente cada vez que pagas tu factura, una vez vinculados los contratos.</li>
-      </ul>
+      📅 Tanto el <strong>Cheque Ahorro</strong> como la <strong>tarjeta regalo</strong> tienen una fecha de validez.<br><br>
+      La fecha exacta la verás en tu app <strong>Mi Club Carrefour</strong> o en la propia tarjeta. Como referencia, suelen ser válidos durante varios meses desde su emisión.<br><br>
+      Te recomendamos usarlos pronto en cualquier centro Carrefour para no perderlos.
     `
   },
+
+  // ============ CONTRATACIÓN Y REQUISITOS ============
   {
     id: "contratar",
     keywords: [
       "contratar", "como contrato", "darme alta luz", "alta luz", "alta gas",
-      "darme alta iberdrola", "cambiarme", "cambiar compañia", "cambiar de compañia",
+      "darme alta iberdrola", "cambiarme", "cambiar compañia",
       "quiero contratar"
     ],
     answer: `
       <strong>Contratar la luz o el gas con Iberdrola</strong> ⚡<br><br>
-      Puedes hacerlo de varias formas:
+      Tienes tres opciones:<br>
       <ul>
-        <li>🌐 Online en <a href="https://www.iberdrola.es/informacion/carrefour" target="_blank" rel="noopener">iberdrola.es/carrefour</a>.</li>
-        <li>📞 Llamando al <strong>900 22 45 22</strong>.</li>
-        <li>🏬 En el <strong>stand Iberdrola</strong> de tu Carrefour más cercano.</li>
+        <li>🌐 Online: <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a></li>
+        <li>📞 Teléfono: <strong>900 22 45 22</strong></li>
+        <li>🏬 Stand de Iberdrola en tu Carrefour</li>
       </ul>
-      Necesitarás tu DNI, IBAN y una factura reciente (o el CUPS de tu suministro).
+      Necesitas: <strong>DNI, IBAN y una factura reciente</strong> (o el CUPS).
     `
   },
   {
@@ -134,43 +330,54 @@ const knowledgeBase = [
       "papeles", "documentos", "que hace falta", "que hay que tener"
     ],
     answer: `
-      <strong>Lo que necesitas para acogerte a la promoción</strong> 📋
+      <strong>Requisitos para acogerte a la promoción</strong> 📋<br>
       <ul>
         <li>✅ Ser <strong>socio del Club Carrefour</strong> (gratuito).</li>
         <li>✅ Tener un <strong>contrato de luz y/o gas con Iberdrola</strong>.</li>
-        <li>✅ <strong>Vincular ambos</strong> en carrefour.es/iberdrola.</li>
+        <li>✅ <strong>Vincular ambos</strong> en <a href="${LINKS.vincular}" target="_blank" rel="noopener">carrefour.es/iberdrola</a>.</li>
       </ul>
-      Con eso ya empiezas a acumular en tu Cheque Ahorro Carrefour.
-    `
-  },
-  {
-    id: "permanencia",
-    keywords: [
-      "permanencia", "compromiso", "tiempo minimo", "cuanto dura", "duracion",
-      "obliga", "obligatorio", "atado", "cancelar"
-    ],
-    answer: `
-      📄 Las tarifas de Iberdrola asociadas a esta promoción <strong>no tienen permanencia</strong>: puedes darte de baja cuando quieras sin penalización.<br><br>
-      Consulta las condiciones particulares de tu tarifa en el momento de contratar.
+      Documentos: <strong>DNI, IBAN y una factura reciente</strong> de tu suministro.
     `
   },
   {
     id: "cups",
-    keywords: ["cups", "que es cups", "donde esta cups", "encontrar cups", "numero contrato"],
+    keywords: [
+      "cups", "que es cups", "donde esta cups", "encontrar cups",
+      "numero contrato", "como saber mi cups"
+    ],
     answer: `
-      🔢 El <strong>CUPS</strong> es el código único de tu punto de suministro de luz o gas. Tiene esta forma: <em>ES0021000001234567AB</em>.<br><br>
-      Lo encuentras en cualquier <strong>factura de tu compañía actual</strong>, normalmente en la primera página.
+      🔢 El <strong>CUPS</strong> es el código único de tu punto de suministro. Tiene esta forma:<br>
+      <em>ES0021000001234567AB</em><br><br>
+      Lo encuentras en cualquier <strong>factura de tu compañía actual</strong>, normalmente en la primera página, junto a los datos del titular.
     `
   },
   {
     id: "tarifas",
     keywords: [
-      "tarifa", "tarifas", "precio", "precios", "kwh", "kilovatio", "cuanto cuesta",
-      "que tarifa", "que plan"
+      "tarifa", "tarifas", "precio", "precios", "kwh", "kilovatio",
+      "cuanto cuesta", "que tarifa", "que plan"
     ],
     answer: `
-      💡 La tarifa principal de esta promoción es el <strong>Plan Online Carrefour</strong> de Iberdrola, que incluye la acumulación en tu Cheque Ahorro.<br><br>
-      Hay variantes para <strong>luz</strong>, <strong>gas</strong> o <strong>ambos combinados</strong>. Los precios actualizados los puedes consultar en <a href="https://www.iberdrola.es/informacion/carrefour" target="_blank" rel="noopener">iberdrola.es/carrefour</a> o llamando al <strong>900 22 45 22</strong>.
+      💡 La tarifa de esta promoción es el <strong>Plan Online Carrefour</strong> de Iberdrola.<br><br>
+      Está disponible para:<br>
+      <ul>
+        <li>💡 <strong>Solo luz</strong></li>
+        <li>🔥 <strong>Solo gas</strong></li>
+        <li>⚡ <strong>Luz + gas combinado</strong></li>
+      </ul>
+      Consulta los precios actualizados en <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a> o llamando al <strong>900 22 45 22</strong>.
+    `
+  },
+  {
+    id: "luz_y_gas",
+    keywords: [
+      "luz y gas", "ambos", "los dos", "luz gas", "gas y luz", "solo luz",
+      "solo gas", "dual"
+    ],
+    answer: `
+      Puedes acogerte con <strong>solo luz</strong>, <strong>solo gas</strong> o <strong>ambos combinados</strong>.<br><br>
+      Si contratas la oferta combinada (luz + gas), la acumulación se aplica sobre <strong>ambos consumos</strong>. 💡🔥<br><br>
+      Detalles en <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a>.
     `
   },
   {
@@ -181,20 +388,26 @@ const knowledgeBase = [
     ],
     answer: `
       🌱 Toda la electricidad de Iberdrola es <strong>100% de origen renovable</strong>, certificada por la CNMC.<br><br>
-      Así contribuyes a un consumo más sostenible mientras ahorras con tu Cheque Ahorro Carrefour.
+      Reduces tu huella de carbono mientras ahorras con tu Cheque Ahorro Carrefour. Doble beneficio. 💚
     `
   },
+
+  // ============ TIEMPOS Y PLAZOS ============
   {
-    id: "luz_y_gas",
+    id: "cuando_recibo",
     keywords: [
-      "luz y gas", "ambos", "los dos", "luz gas", "gas y luz", "solo luz",
-      "solo gas", "dual"
+      "cuando recibo", "cuando llega", "cuanto tarda", "plazo", "cuando me dan",
+      "cuando lo cobro", "cuando se activa", "cuando empieza"
     ],
     answer: `
-      Puedes acogerte a la promoción con <strong>solo luz</strong>, <strong>solo gas</strong> o <strong>ambos</strong>.<br><br>
-      Si contratas la oferta combinada (luz + gas), la acumulación se aplica sobre ambos consumos. 💡🔥
+      ⏱️ <strong>Plazos habituales:</strong><br><br>
+      <strong>Cambio de compañía:</strong> entre 15 y 21 días desde que firmas. No te quedas sin suministro en ningún momento.<br><br>
+      <strong>Tarjeta regalo:</strong> llega por email en pocos días y se <strong>activa a los 15 días</strong> de contratar.<br><br>
+      <strong>Acumulación en Cheque Ahorro:</strong> se carga automáticamente cada vez que pagas una factura, una vez vinculados los contratos.
     `
   },
+
+  // ============ CONTACTO Y SOPORTE ============
   {
     id: "telefono",
     keywords: [
@@ -202,27 +415,28 @@ const knowledgeBase = [
       "hablar con alguien", "soporte"
     ],
     answer: `
-      📞 Puedes contactar con Iberdrola a través de:
+      📞 <strong>Teléfonos de Iberdrola:</strong><br>
       <ul>
         <li><strong>900 22 45 22</strong> · Información sobre la promoción Carrefour</li>
         <li><strong>900 100 270</strong> · Atención al cliente general (24h)</li>
-        <li>🌐 <a href="https://www.iberdrola.es" target="_blank" rel="noopener">iberdrola.es</a></li>
-        <li>📱 App <strong>Mi Iberdrola</strong></li>
       </ul>
+      🌐 <a href="${LINKS.iberdrola}" target="_blank" rel="noopener">iberdrola.es</a><br>
+      📱 App <strong>Mi Iberdrola</strong>
     `
   },
   {
     id: "problemas",
     keywords: [
       "problema", "error", "no funciona", "no me llega", "reclamacion",
-      "queja", "incidencia", "fallo"
+      "queja", "incidencia", "fallo", "no me carga"
     ],
     answer: `
-      Lamento el inconveniente. 😔 Si tienes una <strong>incidencia con tu contrato o tu acumulación</strong>, puedes:
+      Lamento el inconveniente. 😔<br><br>
+      Si tienes una <strong>incidencia con tu contrato o tu acumulación</strong>:<br>
       <ul>
-        <li>📞 Llamar al <strong>900 100 270</strong> (atención al cliente 24h).</li>
-        <li>📱 Gestionarlo desde la app <strong>Mi Iberdrola</strong>.</li>
-        <li>🏬 Acercarte al stand de Iberdrola en tu Carrefour.</li>
+        <li>📞 <strong>900 100 270</strong> (atención al cliente 24h)</li>
+        <li>📱 App <strong>Mi Iberdrola</strong></li>
+        <li>🏬 Acércate al <strong>stand de Iberdrola</strong> en tu Carrefour</li>
       </ul>
     `
   },
@@ -230,37 +444,59 @@ const knowledgeBase = [
     id: "donde_stand",
     keywords: [
       "donde estais", "donde os encuentro", "tienda", "stand", "centro carrefour",
-      "donde hay", "ubicacion", "hipermercado"
+      "donde hay", "ubicacion", "hipermercado", "carrefour cerca"
     ],
     answer: `
       🏬 Encontrarás stands de Iberdrola en <strong>hipermercados y supermercados Carrefour</strong> de toda España.<br><br>
-      Para localizar el más cercano, consulta <a href="https://www.carrefour.es/tiendas" target="_blank" rel="noopener">carrefour.es/tiendas</a>.
+      Localizador oficial: <a href="${LINKS.tiendas}" target="_blank" rel="noopener">carrefour.es/tiendas</a>
     `
   },
   {
     id: "datos",
     keywords: [
-      "proteccion de datos", "mis datos", "privacidad", "rgpd", "que pasa con mis datos",
-      "datos personales", "seguro"
+      "proteccion de datos", "mis datos", "privacidad", "rgpd",
+      "que pasa con mis datos", "datos personales", "seguro"
     ],
     answer: `
       🔒 Tus datos están protegidos conforme al <strong>RGPD</strong> y la LOPDGDD.<br><br>
-      Iberdrola y Carrefour solo usan tu información para gestionar la promoción y los servicios contratados. Puedes consultar la política completa en <a href="https://www.iberdrola.es/politica-privacidad" target="_blank" rel="noopener">iberdrola.es/politica-privacidad</a>.
+      Iberdrola y Carrefour solo usan tu información para gestionar la promoción y los servicios contratados.<br><br>
+      Política completa: <a href="${LINKS.privacidad}" target="_blank" rel="noopener">iberdrola.es/politica-privacidad</a>
     `
   },
   {
     id: "cancelar",
-    keywords: ["cancelar", "darme baja", "baja", "anular", "rescindir", "salir", "dejar"],
+    keywords: [
+      "cancelar", "darme baja", "baja", "anular", "rescindir", "salir", "dejar"
+    ],
     answer: `
-      📤 Puedes darte de baja en cualquier momento:
+      📤 Puedes darte de baja cuando quieras (<strong>sin permanencia</strong>):<br>
       <ul>
-        <li>📞 Llamando al <strong>900 100 270</strong>.</li>
-        <li>📱 Desde la app <strong>Mi Iberdrola</strong>.</li>
-        <li>✍️ Por escrito a través del formulario en iberdrola.es.</li>
+        <li>📞 <strong>900 100 270</strong></li>
+        <li>📱 App <strong>Mi Iberdrola</strong></li>
+        <li>✍️ Formulario en <a href="${LINKS.iberdrola}" target="_blank" rel="noopener">iberdrola.es</a></li>
       </ul>
-      Las tarifas de esta promoción <strong>no tienen permanencia</strong>.
     `
   },
+
+  // ============ ENLACES DIRECTOS ============
+  {
+    id: "web_iberdrola",
+    keywords: [
+      "web iberdrola", "pagina iberdrola", "enlace iberdrola", "url iberdrola",
+      "donde info", "mas info"
+    ],
+    answer: `
+      🌐 Aquí tienes los enlaces oficiales:<br>
+      <ul>
+        <li><a href="${LINKS.promo}" target="_blank" rel="noopener">Promoción Iberdrola × Carrefour</a></li>
+        <li><a href="${LINKS.vincular}" target="_blank" rel="noopener">Vincular contratos (Carrefour)</a></li>
+        <li><a href="${LINKS.iberdrola}" target="_blank" rel="noopener">Iberdrola</a></li>
+        <li><a href="${LINKS.carrefour}" target="_blank" rel="noopener">Carrefour</a></li>
+      </ul>
+    `
+  },
+
+  // ============ CONVERSACIONAL ============
   {
     id: "saludo",
     keywords: [
@@ -268,9 +504,9 @@ const knowledgeBase = [
       "ey", "que tal", "saludos"
     ],
     answer: `
-      ¡Hola! 👋 Soy el asistente de la alianza <strong>Iberdrola × Carrefour</strong>.<br><br>
-      Puedo ayudarte con la <strong>promoción</strong>, cómo <strong>hacerte socio del Club</strong>, cómo <strong>vincular tu contrato</strong> o cuánto puedes <strong>ahorrar</strong>.<br><br>
-      ¿Qué te gustaría saber?
+      ¡Hola! 👋 Soy el asistente virtual de la alianza <strong>Iberdrola × Carrefour</strong>.<br><br>
+      Puedo guiarte por el <strong>procedimiento paso a paso</strong>, resolverte cualquier <strong>duda</strong> y darte los <strong>enlaces oficiales</strong>.<br><br>
+      Prueba a escribir cosas como <em>"cómo funciona"</em>, <em>"cuánto ahorro"</em> o <em>"qué necesito".</em>
     `
   },
   {
@@ -291,86 +527,91 @@ const knowledgeBase = [
     ],
     answer: `
       🤖 Soy el <strong>Asistente Virtual</strong> de la alianza Iberdrola × Carrefour.<br><br>
-      Estoy aquí para resolver tus dudas sobre la promoción y ayudarte a empezar a ahorrar con tu energía. ¿En qué puedo ayudarte?
+      Te puedo guiar paso a paso por la promoción, resolverte dudas y darte los enlaces oficiales. ¿En qué te ayudo?
     `
   },
   {
     id: "ayuda",
     keywords: [
-      "ayuda", "ayudame", "que puedes hacer", "que sabes", "que puedo preguntarte",
-      "help", "opciones"
+      "ayuda", "ayudame", "que puedes hacer", "que sabes",
+      "que puedo preguntarte", "help", "opciones", "menu"
     ],
     answer: `
-      Puedo ayudarte con temas como:
+      Puedo ayudarte con:<br>
       <ul>
-        <li>💚 <strong>La alianza Iberdrola × Carrefour</strong></li>
-        <li>🛒 Cómo <strong>hacerte socio del Club Carrefour</strong></li>
-        <li>🔗 Cómo <strong>vincular tu contrato</strong></li>
-        <li>💰 Cuánto puedes <strong>ahorrar</strong></li>
-        <li>🎁 La <strong>tarjeta regalo</strong></li>
-        <li>⚡ <strong>Contratar</strong> luz o gas</li>
+        <li>📝 <strong>El procedimiento paso a paso</strong> ("cómo funciona")</li>
+        <li>💚 <strong>Sobre la promoción</strong> (qué es, ventajas, energía verde)</li>
+        <li>🛒 <strong>Hacerse socio del Club Carrefour</strong></li>
+        <li>⚡ <strong>Contratar luz o gas con Iberdrola</strong></li>
+        <li>🔗 <strong>Vincular tu contrato</strong></li>
+        <li>💰 <strong>Ahorro, Cheque Ahorro, tarjeta regalo</strong></li>
+        <li>📋 <strong>Requisitos, CUPS, tarifas, plazos</strong></li>
+        <li>❓ <strong>Dudas:</strong> ¿es gratis?, ¿hay permanencia?, ¿me suben el precio?, ¿me cortan la luz?, etc.</li>
         <li>📞 <strong>Contacto y atención al cliente</strong></li>
+        <li>🌐 <strong>Enlaces oficiales</strong></li>
       </ul>
       Pregúntame lo que quieras.
-    `
-  },
-  {
-    id: "broma",
-    keywords: ["chiste", "cuentame un chiste", "broma", "hazme reir", "eres gracioso"],
-    answer: `
-      😄 No soy muy bueno con los chistes, pero te dejo uno fácil:<br><br>
-      <em>— ¿Qué le dice una bombilla a otra?</em><br>
-      <em>— Te echo de menos cuando te apagas.</em> 💡<br><br>
-      Vale, mejor sigamos con la promoción. 😅
     `
   }
 ];
 
-// ---------- Mensajes de bienvenida según botón ----------
+// Mensajes de bienvenida según botón
 const intentWelcomeMessages = {
   que_es: `
-    ¡Genial que quieras conocer la alianza! 💚<br><br>
-    <strong>Iberdrola × Carrefour</strong> es una promoción que te permite <strong>ahorrar en tu compra</strong> mientras pagas tu factura de luz o gas. Estas son las ventajas principales:
+    ¡Genial! Te cuento qué es la alianza <strong>Iberdrola × Carrefour</strong> 💚<br><br>
+    Es una promoción que te permite <strong>ahorrar en tu compra</strong> mientras pagas tu factura de luz o gas:
     <ul>
       <li>💰 Hasta un <strong>6% de acumulación</strong> en tu Cheque Ahorro Carrefour.</li>
       <li>🎁 <strong>Tarjeta regalo Carrefour</strong> al contratar.</li>
       <li>⚡ Energía <strong>100% verde certificada</strong>.</li>
     </ul>
-    ¿Quieres saber más sobre algún punto en concreto?
+    Si quieres, te puedo explicar <em>"cómo funciona paso a paso"</em>, o pregúntame cualquier duda.<br><br>
+    🌐 Web oficial: <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a>
   `,
   contratar: `
-    ¡Perfecto! Vamos a contratar. ⚡<br><br>
-    Para acogerte a la promoción <strong>Iberdrola × Carrefour</strong> tienes tres opciones:
+    ¡Perfecto, vamos a contratar! ⚡<br><br>
+    Tienes tres opciones para acogerte a la promoción:
     <ul>
-      <li>🌐 Online en <a href="https://www.iberdrola.es/informacion/carrefour" target="_blank" rel="noopener">iberdrola.es/carrefour</a>.</li>
-      <li>📞 Llamando al <strong>900 22 45 22</strong>.</li>
-      <li>🏬 En el <strong>stand Iberdrola</strong> de tu Carrefour más cercano.</li>
+      <li>🌐 Online: <a href="${LINKS.promo}" target="_blank" rel="noopener">iberdrola.es/carrefour</a></li>
+      <li>📞 Teléfono: <strong>900 22 45 22</strong></li>
+      <li>🏬 <strong>Stand de Iberdrola</strong> en tu Carrefour</li>
     </ul>
-    Ten a mano tu <strong>DNI, IBAN y una factura reciente</strong> (o el CUPS de tu suministro). ¿Te ayudo con algo más?
+    Necesitas: <strong>DNI, IBAN y una factura reciente</strong> (o el CUPS).<br><br>
+    ¿Quieres que te explique los <em>pasos</em>, los <em>requisitos</em> o cualquier otra duda?
   `,
   dudas: `
-    Claro, pregúntame lo que quieras. 💬<br><br>
-    Puedo ayudarte con la <strong>promoción</strong>, el <strong>Club Carrefour</strong>, la <strong>vinculación</strong>, la <strong>tarjeta regalo</strong>, los <strong>plazos</strong>, las <strong>tarifas</strong>, los <strong>teléfonos de contacto</strong> y mucho más.<br><br>
-    Escribe tu pregunta o usa los botones de abajo para empezar.
+    Claro, pregúntame lo que quieras 💬<br><br>
+    Algunas dudas frecuentes que puedo resolverte:
+    <ul>
+      <li>¿Es gratis la promoción?</li>
+      <li>¿Hay permanencia?</li>
+      <li>¿Me suben el precio luego?</li>
+      <li>¿Me cortan la luz al cambiarme?</li>
+      <li>¿Y si ya soy cliente de Iberdrola?</li>
+      <li>¿Funciona si vivo de alquiler?</li>
+      <li>¿Cuánto tarda en activarse?</li>
+    </ul>
+    Escribe tu pregunta abajo o pulsa uno de los botones rápidos.
   `
 };
 
 const defaultWelcomeMessage = `
   ¡Hola! 👋 Soy el asistente virtual de la alianza <strong>Iberdrola × Carrefour</strong>.<br><br>
-  Estoy aquí para resolver tus dudas sobre la promoción. ¿En qué puedo ayudarte?
+  Estoy aquí para resolver tus dudas. ¿En qué puedo ayudarte?
 `;
 
-// Mensaje de respaldo
+// Mensaje de respaldo (cuando no se reconoce la pregunta)
 const fallbackMessage = `
-  🤔 Lo siento, no he entendido tu pregunta.<br><br>
-  Soy una demo, así que solo respondo a temas relacionados con la <strong>alianza Iberdrola × Carrefour</strong>. Prueba a preguntarme sobre:
+  🤔 No estoy seguro de haber entendido tu pregunta.<br><br>
+  Prueba a preguntarme cosas como:
   <ul>
-    <li>De qué trata la colaboración</li>
-    <li>Cómo hacerte socio del Club Carrefour</li>
-    <li>Cómo vincular tu contrato</li>
-    <li>Cuánto puedes ahorrar</li>
+    <li><em>"¿Cómo funciona la promoción?"</em></li>
+    <li><em>"¿Cuánto puedo ahorrar?"</em></li>
+    <li><em>"¿Qué necesito para contratar?"</em></li>
+    <li><em>"¿Hay permanencia?"</em></li>
+    <li><em>"¿Cómo vinculo mi contrato?"</em></li>
   </ul>
-  También puedes escribir <strong>"ayuda"</strong> para ver todos los temas.
+  O escribe <strong>"ayuda"</strong> para ver todos los temas que conozco.
 `;
 
 // ---------- Utilidades ----------
@@ -402,7 +643,7 @@ function findAnswer(userText) {
   return bestMatch ? bestMatch.answer : fallbackMessage;
 }
 
-// ---------- Elementos del DOM ----------
+// ---------- DOM ----------
 const welcomeScreen = document.getElementById("welcome-screen");
 const chatWrapper = document.getElementById("chat-wrapper");
 const messagesEl = document.getElementById("messages");
@@ -446,9 +687,8 @@ function botReply(userText) {
 function showChat(intent = null) {
   welcomeScreen.hidden = true;
   chatWrapper.hidden = false;
-  messagesEl.innerHTML = ""; // limpia mensajes previos
+  messagesEl.innerHTML = "";
 
-  // Muestra el mensaje de bienvenida correspondiente al botón pulsado
   const welcomeMsg = intent && intentWelcomeMessages[intent]
     ? intentWelcomeMessages[intent]
     : defaultWelcomeMessage;
@@ -466,7 +706,7 @@ function showWelcome() {
   welcomeScreen.hidden = false;
 }
 
-// ---------- Eventos: pantalla de bienvenida ----------
+// ---------- Eventos ----------
 document.querySelectorAll(".welcome-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     const intent = btn.dataset.intent;
@@ -474,7 +714,6 @@ document.querySelectorAll(".welcome-btn").forEach((btn) => {
   });
 });
 
-// ---------- Eventos: chat ----------
 formEl.addEventListener("submit", (e) => {
   e.preventDefault();
   const text = inputEl.value.trim();

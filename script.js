@@ -14,6 +14,9 @@ const LINKS = {
   appClub: "https://www.carrefour.es/club"
 };
 
+// Recuerda el último tema respondido por el bot (para "sí", "más", etc.)
+let lastTopic = null;
+
 // ---------- Base de conocimiento ----------
 const knowledgeBase = [
 
@@ -555,7 +558,7 @@ const knowledgeBase = [
   }
 ];
 
-// Mensajes de bienvenida según botón
+// ---------- Mensajes de bienvenida según botón ----------
 const intentWelcomeMessages = {
   que_es: `
     ¡Genial! Te cuento qué es la alianza <strong>Iberdrola × Carrefour</strong> 💚<br><br>
@@ -614,6 +617,88 @@ const fallbackMessage = `
   O escribe <strong>"ayuda"</strong> para ver todos los temas que conozco.
 `;
 
+// ---------- Respuestas cortas (sí/no/más) ----------
+const SHORT_REPLIES = {
+  yes: ["si", "sí", "claro", "ok", "okay", "okey", "vale", "venga", "porfa", "por favor", "si por favor", "claro que si", "yes", "yep", "dale", "perfecto", "me interesa"],
+  no: ["no", "nop", "no gracias", "ahora no", "mejor no", "paso", "nah"],
+  more: ["mas", "más", "mas info", "más info", "cuentame mas", "cuéntame más", "dime mas", "dime más", "explicame mas", "explícame más", "amplia", "amplía", "sigue"]
+};
+
+// Sugerencias contextuales según el último tema
+const FOLLOWUP_SUGGESTIONS = {
+  procedimiento: `
+    ¡Genial! ¿Sobre qué paso quieres que profundice? Puedes preguntarme:
+    <ul>
+      <li><em>"Paso 1: hacerme socio"</em></li>
+      <li><em>"Paso 2: contratar"</em></li>
+      <li><em>"Paso 3: vincular"</em></li>
+      <li><em>"Paso 4: empezar a ahorrar"</em></li>
+    </ul>
+  `,
+  colaboracion: `
+    Perfecto. ¿Qué te interesa saber más?
+    <ul>
+      <li><em>"¿Cómo funciona paso a paso?"</em></li>
+      <li><em>"¿Cuánto puedo ahorrar?"</em></li>
+      <li><em>"¿Qué necesito para contratar?"</em></li>
+    </ul>
+  `,
+  contratar: `
+    Vale, te oriento. ¿Qué quieres saber?
+    <ul>
+      <li><em>"¿Qué requisitos necesito?"</em></li>
+      <li><em>"¿Qué es el CUPS?"</em></li>
+      <li><em>"¿Hay permanencia?"</em></li>
+      <li><em>"¿Me cortan la luz al cambiarme?"</em></li>
+    </ul>
+  `,
+  ahorro: `
+    Si quieres saber más sobre el ahorro, puedes preguntarme:
+    <ul>
+      <li><em>"¿Dónde puedo gastar el cheque?"</em></li>
+      <li><em>"¿Cuándo se aplica?"</em></li>
+      <li><em>"¿Caduca el cheque?"</em></li>
+    </ul>
+  `,
+  tarjeta_regalo: `
+    Cuéntame qué te interesa:
+    <ul>
+      <li><em>"¿Cuándo recibo la tarjeta?"</em></li>
+      <li><em>"¿Dónde la puedo gastar?"</em></li>
+      <li><em>"¿Caduca?"</em></li>
+    </ul>
+  `,
+  paso1_socio: `
+    Bien. ¿Sigues con el siguiente paso?
+    <ul>
+      <li><em>"Paso 2: contratar con Iberdrola"</em></li>
+      <li><em>"¿Cómo vinculo los contratos?"</em></li>
+    </ul>
+  `,
+  paso3_vincular: `
+    Perfecto. ¿Quieres saber más sobre:
+    <ul>
+      <li><em>"¿Cuándo empiezo a ahorrar?"</em></li>
+      <li><em>"¿Dónde gasto el cheque?"</em></li>
+    </ul>
+  `
+};
+
+const genericYesMessage = `
+  ¡Vale! ¿Sobre qué te gustaría saber más? Puedes preguntarme por:
+  <ul>
+    <li>📝 <em>"Cómo funciona la promoción"</em></li>
+    <li>💰 <em>"Cuánto puedo ahorrar"</em></li>
+    <li>⚡ <em>"Cómo contratar"</em></li>
+    <li>🎁 <em>"La tarjeta regalo"</em></li>
+  </ul>
+  O escribe <strong>"ayuda"</strong> para ver todos los temas.
+`;
+
+const genericNoMessage = `
+  Sin problema. 😊 Si surge alguna otra duda, escríbeme cuando quieras. Recuerda que también puedes preguntar <strong>"ayuda"</strong> para ver todos los temas.
+`;
+
 // ---------- Utilidades ----------
 function normalize(text) {
   return text
@@ -625,6 +710,24 @@ function normalize(text) {
 
 function findAnswer(userText) {
   const text = normalize(userText);
+
+  // --- 1. Detectar respuestas cortas (sí/no/más) ---
+  const isYes = SHORT_REPLIES.yes.includes(text);
+  const isNo = SHORT_REPLIES.no.includes(text);
+  const isMore = SHORT_REPLIES.more.includes(text);
+
+  if (isYes || isMore) {
+    if (lastTopic && FOLLOWUP_SUGGESTIONS[lastTopic]) {
+      return FOLLOWUP_SUGGESTIONS[lastTopic];
+    }
+    return genericYesMessage;
+  }
+
+  if (isNo) {
+    return genericNoMessage;
+  }
+
+  // --- 2. Búsqueda normal en la base de conocimiento ---
   let bestMatch = null;
   let bestScore = 0;
 
@@ -640,7 +743,12 @@ function findAnswer(userText) {
     }
   }
 
-  return bestMatch ? bestMatch.answer : fallbackMessage;
+  if (bestMatch) {
+    lastTopic = bestMatch.id;
+    return bestMatch.answer;
+  }
+
+  return fallbackMessage;
 }
 
 // ---------- DOM ----------
@@ -689,6 +797,14 @@ function showChat(intent = null) {
   chatWrapper.hidden = false;
   messagesEl.innerHTML = "";
 
+  // Mapear cada intent a un topic relacionado de la base de conocimiento
+  const intentToTopic = {
+    que_es: "colaboracion",
+    contratar: "contratar",
+    dudas: null
+  };
+  lastTopic = intentToTopic[intent] || null;
+
   const welcomeMsg = intent && intentWelcomeMessages[intent]
     ? intentWelcomeMessages[intent]
     : defaultWelcomeMessage;
@@ -704,6 +820,7 @@ function showChat(intent = null) {
 function showWelcome() {
   chatWrapper.hidden = true;
   welcomeScreen.hidden = false;
+  lastTopic = null;
 }
 
 // ---------- Eventos ----------
@@ -730,6 +847,7 @@ shortcutsEl.addEventListener("click", (e) => {
   const text = btn.textContent.trim();
   addMessage(text, "user");
   const entry = knowledgeBase.find((k) => k.id === key);
+  if (entry) lastTopic = entry.id;
   showTyping();
   setTimeout(() => {
     hideTyping();

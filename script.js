@@ -4,14 +4,14 @@
    ============================================================ */
 
 // ---------- Base de conocimiento ----------
-// Cada entrada define keywords (en minúscula, sin acentos) y una respuesta HTML.
 const knowledgeBase = [
+  // ===== ALIANZA / PROMOCIÓN =====
   {
     id: "colaboracion",
     keywords: [
       "colaboracion", "alianza", "acuerdo", "que es", "de que trata",
       "en que consiste", "iberdrola carrefour", "carrefour iberdrola",
-      "promocion", "promo", "oferta"
+      "promocion", "promo", "oferta", "ventajas", "beneficios", "que ofrece"
     ],
     answer: `
       <strong>¡Bienvenido a la alianza Iberdrola × Carrefour!</strong><br><br>
@@ -29,7 +29,7 @@ const knowledgeBase = [
     keywords: [
       "socio", "hacerme socio", "club carrefour", "alta club", "registrarme",
       "registrar", "darme alta", "darme de alta", "club", "tarjeta club",
-      "como ser socio", "hacerme del club"
+      "como ser socio", "hacerme del club", "ser del club", "apuntarme"
     ],
     answer: `
       <strong>Hacerte socio del Club Carrefour es gratis y rápido</strong> 🛒<br><br>
@@ -38,14 +38,15 @@ const knowledgeBase = [
         <li>📱 Desde la <strong>app Mi Club Carrefour</strong> (Android e iOS).</li>
         <li>🏬 En el <strong>punto de atención al cliente</strong> de cualquier hipermercado Carrefour.</li>
       </ul>
-      Al darte de alta recibirás tu <strong>tarjeta digital del Club</strong>, que necesitarás para vincularla con tu contrato de Iberdrola y empezar a acumular ahorro.
+      Al darte de alta recibirás tu <strong>tarjeta digital del Club</strong>, que necesitarás para vincularla con tu contrato de Iberdrola.
     `
   },
   {
     id: "vincular",
     keywords: [
       "vincular", "vinculacion", "enlazar", "unir", "asociar", "conectar contrato",
-      "como vinculo", "vincular contrato", "vincular cuentas"
+      "como vinculo", "vincular contrato", "vincular cuentas", "unir contrato",
+      "juntar", "asociar contrato"
     ],
     answer: `
       <strong>Cómo vincular tu contrato Iberdrola con el Club Carrefour</strong> 🔗<br><br>
@@ -58,11 +59,13 @@ const knowledgeBase = [
       A partir de ese momento, tu <strong>acumulación se cargará automáticamente</strong> en tu Cheque Ahorro Carrefour.
     `
   },
+
+  // ===== AHORRO / DINERO =====
   {
     id: "ahorro",
     keywords: [
       "cuanto ahorro", "ahorro", "ahorrar", "porcentaje", "acumulacion",
-      "cuanto acumulo", "cheque ahorro", "cheque", "descuento"
+      "cuanto acumulo", "cheque ahorro", "cheque", "descuento", "rebaja"
     ],
     answer: `
       <strong>Acumulación en tu Cheque Ahorro Carrefour</strong> 💰<br><br>
@@ -73,7 +76,7 @@ const knowledgeBase = [
   {
     id: "tarjeta_regalo",
     keywords: [
-      "tarjeta regalo", "regalo", "cheque regalo", "tarjeta", "bono"
+      "tarjeta regalo", "regalo", "cheque regalo", "tarjeta", "bono", "vale"
     ],
     answer: `
       <strong>Tarjeta regalo Carrefour</strong> 🎁<br><br>
@@ -82,10 +85,43 @@ const knowledgeBase = [
     `
   },
   {
+    id: "donde_canjear",
+    keywords: [
+      "donde canjear", "donde gastar", "donde uso", "donde usar", "canjear",
+      "gastar cheque", "usar cheque", "donde se gasta"
+    ],
+    answer: `
+      Tu Cheque Ahorro y tu tarjeta regalo Carrefour se pueden gastar en:
+      <ul>
+        <li>🏬 <strong>Hipermercados y supermercados Carrefour</strong></li>
+        <li>⛽ <strong>Gasolineras Carrefour</strong></li>
+        <li>🌐 <strong>Carrefour.es</strong> (compra online)</li>
+        <li>🛍️ Tiendas <strong>Carrefour Market y Express</strong></li>
+      </ul>
+    `
+  },
+  {
+    id: "cuando_recibo",
+    keywords: [
+      "cuando recibo", "cuando llega", "cuanto tarda", "plazo", "cuando me dan",
+      "cuando lo cobro", "cuando se activa"
+    ],
+    answer: `
+      ⏱️ Los plazos habituales son:
+      <ul>
+        <li>📧 <strong>Tarjeta regalo</strong>: la recibes por email en pocos días tras contratar y se <strong>activa a los 15 días</strong>.</li>
+        <li>💳 <strong>Acumulación en Cheque Ahorro</strong>: se carga automáticamente cada vez que pagas tu factura, una vez vinculados los contratos.</li>
+      </ul>
+    `
+  },
+
+  // ===== CONTRATACIÓN =====
+  {
     id: "contratar",
     keywords: [
       "contratar", "como contrato", "darme alta luz", "alta luz", "alta gas",
-      "darme alta iberdrola", "cambiarme", "cambiar compañia"
+      "darme alta iberdrola", "cambiarme", "cambiar compañia", "cambiar de compañia",
+      "quiero contratar"
     ],
     answer: `
       <strong>Contratar la luz o el gas con Iberdrola</strong> ⚡<br><br>
@@ -102,10 +138,10 @@ const knowledgeBase = [
     id: "requisitos",
     keywords: [
       "requisitos", "necesito", "que necesito", "documentacion", "que pide",
-      "papeles"
+      "papeles", "documentos", "que hace falta", "que hay que tener"
     ],
     answer: `
-      <strong>Lo que necesitas para acogerte a la promoción</strong> 📋<br>
+      <strong>Lo que necesitas para acogerte a la promoción</strong> 📋
       <ul>
         <li>✅ Ser <strong>socio del Club Carrefour</strong> (gratuito).</li>
         <li>✅ Tener un <strong>contrato de luz y/o gas con Iberdrola</strong>.</li>
@@ -115,10 +151,44 @@ const knowledgeBase = [
     `
   },
   {
+    id: "permanencia",
+    keywords: [
+      "permanencia", "compromiso", "tiempo minimo", "cuanto dura", "duracion",
+      "obliga", "obligatorio", "atado", "cancelar"
+    ],
+    answer: `
+      📄 Las tarifas de Iberdrola asociadas a esta promoción <strong>no tienen permanencia</strong>: puedes darte de baja cuando quieras sin penalización.<br><br>
+      Consulta las condiciones particulares de tu tarifa en el momento de contratar.
+    `
+  },
+  {
+    id: "cups",
+    keywords: [
+      "cups", "que es cups", "donde esta cups", "encontrar cups", "numero contrato"
+    ],
+    answer: `
+      🔢 El <strong>CUPS</strong> es el código único de tu punto de suministro de luz o gas. Tiene esta forma: <em>ES0021000001234567AB</em>.<br><br>
+      Lo encuentras en cualquier <strong>factura de tu compañía actual</strong>, normalmente en la primera página.
+    `
+  },
+  {
+    id: "tarifas",
+    keywords: [
+      "tarifa", "tarifas", "precio", "precios", "kwh", "kilovatio", "cuanto cuesta",
+      "que tarifa", "que plan"
+    ],
+    answer: `
+      💡 La tarifa principal de esta promoción es el <strong>Plan Online Carrefour</strong> de Iberdrola, que incluye la acumulación en tu Cheque Ahorro.<br><br>
+      Hay variantes para <strong>luz</strong>, <strong>gas</strong> o <strong>ambos combinados</strong>. Los precios actualizados los puedes consultar en <a href="https://www.iberdrola.es/informacion/carrefour" target="_blank" rel="noopener">iberdrola.es/carrefour</a> o llamando al <strong>900 22 45 22</strong>.
+    `
+  },
+
+  // ===== ENERGÍA / GENERAL =====
+  {
     id: "energia_verde",
     keywords: [
       "energia verde", "renovable", "100% verde", "sostenible", "ecologica",
-      "medio ambiente"
+      "medio ambiente", "co2", "huella"
     ],
     answer: `
       🌱 Toda la electricidad de Iberdrola es <strong>100% de origen renovable</strong>, certificada por la CNMC.<br><br>
@@ -126,10 +196,96 @@ const knowledgeBase = [
     `
   },
   {
+    id: "luz_y_gas",
+    keywords: [
+      "luz y gas", "ambos", "los dos", "luz gas", "gas y luz", "solo luz",
+      "solo gas", "dual"
+    ],
+    answer: `
+      Puedes acogerte a la promoción con <strong>solo luz</strong>, <strong>solo gas</strong> o <strong>ambos</strong>.<br><br>
+      Si contratas la oferta combinada (luz + gas), la acumulación se aplica sobre ambos consumos. 💡🔥
+    `
+  },
+
+  // ===== ATENCIÓN AL CLIENTE / SOPORTE =====
+  {
+    id: "telefono",
+    keywords: [
+      "telefono", "llamar", "contacto", "numero", "atencion al cliente",
+      "hablar con alguien", "soporte"
+    ],
+    answer: `
+      📞 Puedes contactar con Iberdrola a través de:
+      <ul>
+        <li><strong>900 22 45 22</strong> · Información sobre la promoción Carrefour</li>
+        <li><strong>900 100 270</strong> · Atención al cliente general (24h)</li>
+        <li>🌐 <a href="https://www.iberdrola.es" target="_blank" rel="noopener">iberdrola.es</a></li>
+        <li>📱 App <strong>Mi Iberdrola</strong></li>
+      </ul>
+    `
+  },
+  {
+    id: "problemas",
+    keywords: [
+      "problema", "error", "no funciona", "no me llega", "reclamacion",
+      "queja", "incidencia", "fallo"
+    ],
+    answer: `
+      Lamento el inconveniente. 😔 Si tienes una <strong>incidencia con tu contrato o tu acumulación</strong>, puedes:
+      <ul>
+        <li>📞 Llamar al <strong>900 100 270</strong> (atención al cliente 24h).</li>
+        <li>📱 Gestionarlo desde la app <strong>Mi Iberdrola</strong>.</li>
+        <li>🏬 Acercarte al stand de Iberdrola en tu Carrefour.</li>
+      </ul>
+    `
+  },
+  {
+    id: "donde_stand",
+    keywords: [
+      "donde estais", "donde os encuentro", "tienda", "stand", "centro carrefour",
+      "donde hay", "ubicacion", "hipermercado"
+    ],
+    answer: `
+      🏬 Encontrarás stands de Iberdrola en <strong>hipermercados y supermercados Carrefour</strong> de toda España.<br><br>
+      Para localizar el más cercano, consulta <a href="https://www.carrefour.es/tiendas" target="_blank" rel="noopener">carrefour.es/tiendas</a>.
+    `
+  },
+
+  // ===== PRIVACIDAD / SEGURIDAD =====
+  {
+    id: "datos",
+    keywords: [
+      "proteccion de datos", "mis datos", "privacidad", "rgpd", "que pasa con mis datos",
+      "datos personales", "seguro"
+    ],
+    answer: `
+      🔒 Tus datos están protegidos conforme al <strong>RGPD</strong> y la LOPDGDD.<br><br>
+      Iberdrola y Carrefour solo usan tu información para gestionar la promoción y los servicios contratados. Puedes consultar la política completa en <a href="https://www.iberdrola.es/politica-privacidad" target="_blank" rel="noopener">iberdrola.es/politica-privacidad</a>.
+    `
+  },
+  {
+    id: "cancelar",
+    keywords: [
+      "cancelar", "darme baja", "baja", "anular", "rescindir", "salir",
+      "dejar"
+    ],
+    answer: `
+      📤 Puedes darte de baja en cualquier momento:
+      <ul>
+        <li>📞 Llamando al <strong>900 100 270</strong>.</li>
+        <li>📱 Desde la app <strong>Mi Iberdrola</strong>.</li>
+        <li>✍️ Por escrito a través del formulario en iberdrola.es.</li>
+      </ul>
+      Las tarifas de esta promoción <strong>no tienen permanencia</strong>.
+    `
+  },
+
+  // ===== CONVERSACIONAL =====
+  {
     id: "saludo",
     keywords: [
       "hola", "buenas", "buenos dias", "buenas tardes", "buenas noches", "hey",
-      "ey", "que tal"
+      "ey", "que tal", "saludos"
     ],
     answer: `
       ¡Hola! 👋 Soy el asistente de la alianza <strong>Iberdrola × Carrefour</strong>.<br><br>
@@ -139,13 +295,56 @@ const knowledgeBase = [
   },
   {
     id: "gracias",
-    keywords: ["gracias", "muchas gracias", "thanks", "thank you"],
+    keywords: ["gracias", "muchas gracias", "thanks", "thank you", "te lo agradezco"],
     answer: `¡A ti! 😊 Si tienes más preguntas, aquí estaré.`
   },
   {
     id: "despedida",
-    keywords: ["adios", "hasta luego", "chao", "bye", "hasta pronto"],
+    keywords: ["adios", "hasta luego", "chao", "bye", "hasta pronto", "nos vemos"],
     answer: `¡Hasta pronto! 👋 No olvides vincular tu Club Carrefour con tu contrato Iberdrola para empezar a ahorrar.`
+  },
+  {
+    id: "quien_eres",
+    keywords: [
+      "quien eres", "que eres", "eres una ia", "eres un robot", "eres humano",
+      "eres real", "como te llamas", "tu nombre"
+    ],
+    answer: `
+      🤖 Soy el <strong>Asistente Virtual</strong> de la alianza Iberdrola × Carrefour.<br><br>
+      Estoy aquí para resolver tus dudas sobre la promoción y ayudarte a empezar a ahorrar con tu energía. ¿En qué puedo ayudarte?
+    `
+  },
+  {
+    id: "ayuda",
+    keywords: [
+      "ayuda", "ayudame", "que puedes hacer", "que sabes", "que puedo preguntarte",
+      "help", "opciones"
+    ],
+    answer: `
+      Puedo ayudarte con temas como:
+      <ul>
+        <li>💚 <strong>La alianza Iberdrola × Carrefour</strong></li>
+        <li>🛒 Cómo <strong>hacerte socio del Club Carrefour</strong></li>
+        <li>🔗 Cómo <strong>vincular tu contrato</strong></li>
+        <li>💰 Cuánto puedes <strong>ahorrar</strong></li>
+        <li>🎁 La <strong>tarjeta regalo</strong></li>
+        <li>⚡ <strong>Contratar</strong> luz o gas</li>
+        <li>📞 <strong>Contacto y atención al cliente</strong></li>
+      </ul>
+      Pregúntame lo que quieras.
+    `
+  },
+  {
+    id: "broma",
+    keywords: [
+      "chiste", "cuentame un chiste", "broma", "hazme reir", "eres gracioso"
+    ],
+    answer: `
+      😄 No soy muy bueno con los chistes, pero te dejo uno fácil:<br><br>
+      <em>— ¿Qué le dice una bombilla a otra?</em><br>
+      <em>— Te echo de menos cuando te apagas.</em> 💡<br><br>
+      Vale, mejor sigamos con la promoción. 😅
+    `
   }
 ];
 
@@ -159,6 +358,7 @@ const fallbackMessage = `
     <li>Cómo vincular tu contrato</li>
     <li>Cuánto puedes ahorrar</li>
   </ul>
+  También puedes escribir <strong>"ayuda"</strong> para ver todos los temas.
 `;
 
 // Mensaje de bienvenida
@@ -187,7 +387,6 @@ function findAnswer(userText) {
   for (const entry of knowledgeBase) {
     for (const keyword of entry.keywords) {
       if (text.includes(keyword)) {
-        // Cuanto más larga la keyword coincidente, más específica es
         const score = keyword.length;
         if (score > bestScore) {
           bestScore = score;
@@ -230,7 +429,6 @@ function hideTyping() {
 
 function botReply(userText) {
   showTyping();
-  // Simulamos un pequeño retardo para que parezca natural
   setTimeout(() => {
     hideTyping();
     const answer = findAnswer(userText);
@@ -254,7 +452,6 @@ shortcutsEl.addEventListener("click", (e) => {
   const key = btn.dataset.key;
   const text = btn.textContent.trim();
   addMessage(text, "user");
-  // Buscar directamente la entrada por id para una respuesta exacta
   const entry = knowledgeBase.find((k) => k.id === key);
   showTyping();
   setTimeout(() => {

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 60" role="img" aria-label="Iberdrola">
+  <!-- Símbolo circular -->
+  <g transform="translate(0,5)">
+    <circle cx="25" cy="25" r="24" fill="#80be27"/>
+    <path d="M25 8 C16 8, 10 14, 10 22 C10 30, 17 36, 25 42 C33 36, 40 30, 40 22 C40 14, 34 8, 25 8 Z M25 15 L25 35 M18 22 L32 22"
+      stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+  </g>
+  <!-- Texto -->
+  <text x="60" y="40" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#1a2a18" letter-spacing="-0.5">
+    iberdrola
+  </text>
+</svg>

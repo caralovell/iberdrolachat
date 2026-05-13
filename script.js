@@ -1,11 +1,10 @@
 /* ============================================================
    Chatbot demo · Iberdrola × Carrefour
-   Sin IA: respuestas basadas en palabras clave.
+   Dos pantallas: bienvenida con CTAs + chat con respuestas.
    ============================================================ */
 
 // ---------- Base de conocimiento ----------
 const knowledgeBase = [
-  // ===== ALIANZA / PROMOCIÓN =====
   {
     id: "colaboracion",
     keywords: [
@@ -59,8 +58,6 @@ const knowledgeBase = [
       A partir de ese momento, tu <strong>acumulación se cargará automáticamente</strong> en tu Cheque Ahorro Carrefour.
     `
   },
-
-  // ===== AHORRO / DINERO =====
   {
     id: "ahorro",
     keywords: [
@@ -75,9 +72,7 @@ const knowledgeBase = [
   },
   {
     id: "tarjeta_regalo",
-    keywords: [
-      "tarjeta regalo", "regalo", "cheque regalo", "tarjeta", "bono", "vale"
-    ],
+    keywords: ["tarjeta regalo", "regalo", "cheque regalo", "tarjeta", "bono", "vale"],
     answer: `
       <strong>Tarjeta regalo Carrefour</strong> 🎁<br><br>
       Si contratas la luz o el gas con Iberdrola dentro de la promoción, recibirás una <strong>tarjeta regalo Carrefour</strong> para gastar en cualquier centro Carrefour.<br><br>
@@ -114,8 +109,6 @@ const knowledgeBase = [
       </ul>
     `
   },
-
-  // ===== CONTRATACIÓN =====
   {
     id: "contratar",
     keywords: [
@@ -163,9 +156,7 @@ const knowledgeBase = [
   },
   {
     id: "cups",
-    keywords: [
-      "cups", "que es cups", "donde esta cups", "encontrar cups", "numero contrato"
-    ],
+    keywords: ["cups", "que es cups", "donde esta cups", "encontrar cups", "numero contrato"],
     answer: `
       🔢 El <strong>CUPS</strong> es el código único de tu punto de suministro de luz o gas. Tiene esta forma: <em>ES0021000001234567AB</em>.<br><br>
       Lo encuentras en cualquier <strong>factura de tu compañía actual</strong>, normalmente en la primera página.
@@ -182,8 +173,6 @@ const knowledgeBase = [
       Hay variantes para <strong>luz</strong>, <strong>gas</strong> o <strong>ambos combinados</strong>. Los precios actualizados los puedes consultar en <a href="https://www.iberdrola.es/informacion/carrefour" target="_blank" rel="noopener">iberdrola.es/carrefour</a> o llamando al <strong>900 22 45 22</strong>.
     `
   },
-
-  // ===== ENERGÍA / GENERAL =====
   {
     id: "energia_verde",
     keywords: [
@@ -206,8 +195,6 @@ const knowledgeBase = [
       Si contratas la oferta combinada (luz + gas), la acumulación se aplica sobre ambos consumos. 💡🔥
     `
   },
-
-  // ===== ATENCIÓN AL CLIENTE / SOPORTE =====
   {
     id: "telefono",
     keywords: [
@@ -250,8 +237,6 @@ const knowledgeBase = [
       Para localizar el más cercano, consulta <a href="https://www.carrefour.es/tiendas" target="_blank" rel="noopener">carrefour.es/tiendas</a>.
     `
   },
-
-  // ===== PRIVACIDAD / SEGURIDAD =====
   {
     id: "datos",
     keywords: [
@@ -265,10 +250,7 @@ const knowledgeBase = [
   },
   {
     id: "cancelar",
-    keywords: [
-      "cancelar", "darme baja", "baja", "anular", "rescindir", "salir",
-      "dejar"
-    ],
+    keywords: ["cancelar", "darme baja", "baja", "anular", "rescindir", "salir", "dejar"],
     answer: `
       📤 Puedes darte de baja en cualquier momento:
       <ul>
@@ -279,8 +261,6 @@ const knowledgeBase = [
       Las tarifas de esta promoción <strong>no tienen permanencia</strong>.
     `
   },
-
-  // ===== CONVERSACIONAL =====
   {
     id: "saludo",
     keywords: [
@@ -336,9 +316,7 @@ const knowledgeBase = [
   },
   {
     id: "broma",
-    keywords: [
-      "chiste", "cuentame un chiste", "broma", "hazme reir", "eres gracioso"
-    ],
+    keywords: ["chiste", "cuentame un chiste", "broma", "hazme reir", "eres gracioso"],
     answer: `
       😄 No soy muy bueno con los chistes, pero te dejo uno fácil:<br><br>
       <em>— ¿Qué le dice una bombilla a otra?</em><br>
@@ -347,6 +325,40 @@ const knowledgeBase = [
     `
   }
 ];
+
+// ---------- Mensajes de bienvenida según botón ----------
+const intentWelcomeMessages = {
+  que_es: `
+    ¡Genial que quieras conocer la alianza! 💚<br><br>
+    <strong>Iberdrola × Carrefour</strong> es una promoción que te permite <strong>ahorrar en tu compra</strong> mientras pagas tu factura de luz o gas. Estas son las ventajas principales:
+    <ul>
+      <li>💰 Hasta un <strong>6% de acumulación</strong> en tu Cheque Ahorro Carrefour.</li>
+      <li>🎁 <strong>Tarjeta regalo Carrefour</strong> al contratar.</li>
+      <li>⚡ Energía <strong>100% verde certificada</strong>.</li>
+    </ul>
+    ¿Quieres saber más sobre algún punto en concreto?
+  `,
+  contratar: `
+    ¡Perfecto! Vamos a contratar. ⚡<br><br>
+    Para acogerte a la promoción <strong>Iberdrola × Carrefour</strong> tienes tres opciones:
+    <ul>
+      <li>🌐 Online en <a href="https://www.iberdrola.es/informacion/carrefour" target="_blank" rel="noopener">iberdrola.es/carrefour</a>.</li>
+      <li>📞 Llamando al <strong>900 22 45 22</strong>.</li>
+      <li>🏬 En el <strong>stand Iberdrola</strong> de tu Carrefour más cercano.</li>
+    </ul>
+    Ten a mano tu <strong>DNI, IBAN y una factura reciente</strong> (o el CUPS de tu suministro). ¿Te ayudo con algo más?
+  `,
+  dudas: `
+    Claro, pregúntame lo que quieras. 💬<br><br>
+    Puedo ayudarte con la <strong>promoción</strong>, el <strong>Club Carrefour</strong>, la <strong>vinculación</strong>, la <strong>tarjeta regalo</strong>, los <strong>plazos</strong>, las <strong>tarifas</strong>, los <strong>teléfonos de contacto</strong> y mucho más.<br><br>
+    Escribe tu pregunta o usa los botones de abajo para empezar.
+  `
+};
+
+const defaultWelcomeMessage = `
+  ¡Hola! 👋 Soy el asistente virtual de la alianza <strong>Iberdrola × Carrefour</strong>.<br><br>
+  Estoy aquí para resolver tus dudas sobre la promoción. ¿En qué puedo ayudarte?
+`;
 
 // Mensaje de respaldo
 const fallbackMessage = `
@@ -361,15 +373,7 @@ const fallbackMessage = `
   También puedes escribir <strong>"ayuda"</strong> para ver todos los temas.
 `;
 
-// Mensaje de bienvenida
-const welcomeMessage = `
-  ¡Hola! 👋 Soy el asistente virtual de la alianza <strong>Iberdrola × Carrefour</strong>.<br><br>
-  Estoy aquí para resolver tus dudas sobre la promoción. ¿En qué puedo ayudarte?
-`;
-
 // ---------- Utilidades ----------
-
-// Normaliza texto: minúsculas y sin tildes
 function normalize(text) {
   return text
     .toLowerCase()
@@ -378,7 +382,6 @@ function normalize(text) {
     .trim();
 }
 
-// Encuentra la mejor coincidencia en la base de conocimiento
 function findAnswer(userText) {
   const text = normalize(userText);
   let bestMatch = null;
@@ -399,12 +402,16 @@ function findAnswer(userText) {
   return bestMatch ? bestMatch.answer : fallbackMessage;
 }
 
-// ---------- Renderizado ----------
+// ---------- Elementos del DOM ----------
+const welcomeScreen = document.getElementById("welcome-screen");
+const chatWrapper = document.getElementById("chat-wrapper");
 const messagesEl = document.getElementById("messages");
 const inputEl = document.getElementById("user-input");
 const formEl = document.getElementById("input-bar");
 const shortcutsEl = document.getElementById("shortcuts");
+const backBtn = document.getElementById("back-btn");
 
+// ---------- Renderizado ----------
 function addMessage(html, sender = "bot") {
   const msg = document.createElement("div");
   msg.className = `message ${sender}`;
@@ -431,12 +438,43 @@ function botReply(userText) {
   showTyping();
   setTimeout(() => {
     hideTyping();
-    const answer = findAnswer(userText);
-    addMessage(answer, "bot");
+    addMessage(findAnswer(userText), "bot");
   }, 700 + Math.random() * 400);
 }
 
-// ---------- Eventos ----------
+// ---------- Navegación entre pantallas ----------
+function showChat(intent = null) {
+  welcomeScreen.hidden = true;
+  chatWrapper.hidden = false;
+  messagesEl.innerHTML = ""; // limpia mensajes previos
+
+  // Muestra el mensaje de bienvenida correspondiente al botón pulsado
+  const welcomeMsg = intent && intentWelcomeMessages[intent]
+    ? intentWelcomeMessages[intent]
+    : defaultWelcomeMessage;
+
+  showTyping();
+  setTimeout(() => {
+    hideTyping();
+    addMessage(welcomeMsg, "bot");
+    inputEl.focus();
+  }, 600);
+}
+
+function showWelcome() {
+  chatWrapper.hidden = true;
+  welcomeScreen.hidden = false;
+}
+
+// ---------- Eventos: pantalla de bienvenida ----------
+document.querySelectorAll(".welcome-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const intent = btn.dataset.intent;
+    showChat(intent);
+  });
+});
+
+// ---------- Eventos: chat ----------
 formEl.addEventListener("submit", (e) => {
   e.preventDefault();
   const text = inputEl.value.trim();
@@ -460,7 +498,4 @@ shortcutsEl.addEventListener("click", (e) => {
   }, 700);
 });
 
-// ---------- Inicialización ----------
-window.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => addMessage(welcomeMessage, "bot"), 300);
-});
+backBtn.addEventListener("click", showWelcome);

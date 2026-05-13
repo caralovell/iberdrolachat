@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asistente Iberdrola × Carrefour</title>
+  <title>Asistente Virtual · Iberdrola × Carrefour</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,9 +14,26 @@
     <!-- Cabecera de marca -->
     <header class="brand-bar">
       <div class="brand-left">
-        <img src="assets/iberdrola-logo.svg" alt="Iberdrola" class="logo-iberdrola" />
+        <!-- Logo Iberdrola (SVG inline) -->
+        <svg class="logo-iberdrola" viewBox="0 0 260 60" xmlns="http://www.w3.org/2000/svg" aria-label="Iberdrola">
+          <g transform="translate(0,5)">
+            <circle cx="25" cy="25" r="24" fill="#80be27"/>
+            <path d="M25 8 C16 8, 10 14, 10 22 C10 30, 17 36, 25 42 C33 36, 40 30, 40 22 C40 14, 34 8, 25 8 Z M25 15 L25 35 M18 22 L32 22"
+              stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </g>
+          <text x="60" y="40" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#1a2a18" letter-spacing="-0.5">iberdrola</text>
+        </svg>
+
         <span class="brand-x">×</span>
-        <img src="assets/carrefour-logo.svg" alt="Carrefour" class="logo-carrefour" />
+
+        <!-- Logo Carrefour (SVG inline) -->
+        <svg class="logo-carrefour" viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg" aria-label="Carrefour">
+          <g transform="translate(5,5)">
+            <polygon points="25,0 50,25 38,25 25,12 12,25 0,25" fill="#004e9f"/>
+            <polygon points="25,50 0,25 12,25 25,38 38,25 50,25" fill="#e3061a"/>
+          </g>
+          <text x="65" y="40" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#004e9f" letter-spacing="-0.5">Carrefour</text>
+        </svg>
       </div>
       <div class="brand-right">
         <span class="badge">DEMO</span>
@@ -30,11 +47,15 @@
         <!-- Cabecera del chat -->
         <div class="chat-header">
           <div class="avatar">
-            <img src="assets/iberdrola-logo.svg" alt="Iberdrola" />
+            <!-- Mini-logo Iberdrola para avatar -->
+            <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-label="Iberdrola">
+              <circle cx="25" cy="25" r="24" fill="#80be27"/>
+              <path d="M25 8 C16 8, 10 14, 10 22 C10 30, 17 36, 25 42 C33 36, 40 30, 40 22 C40 14, 34 8, 25 8 Z M25 15 L25 35 M18 22 L32 22"
+                stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
           </div>
           <div class="chat-header-info">
-            <h2>Asistente Iberdrola</h2>
-            <p><span class="status-dot"></span> En línea · Promoción Carrefour</p>
+            <h2>Asistente Virtual</h2>
           </div>
         </div>
 
@@ -66,10 +87,6 @@
           </button>
         </form>
       </div>
-
-      <p class="footer-note">
-        Demo informativa · Iberdrola × El Club Carrefour
-      </p>
     </main>
   </div>
 

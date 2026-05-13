@@ -66,7 +66,170 @@ html, body {
   flex-shrink: 0;
 }
 
-/* ====== Wrapper del chat ====== */
+/* ====== PANTALLA 1: BIENVENIDA ====== */
+.welcome-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 4vw, 40px);
+  overflow-y: auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.welcome-content {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Avatar */
+.avatar-hero {
+  width: clamp(140px, 22vw, 200px);
+  height: clamp(140px, 22vw, 200px);
+  position: relative;
+  margin-bottom: clamp(20px, 3vw, 32px);
+  animation: floatUp 3s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.avatar-hero svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 30px rgba(74, 139, 26, 0.25));
+}
+
+.ring-rotate {
+  transform-origin: center;
+  animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.status-pulse {
+  position: absolute;
+  bottom: 8%;
+  right: 8%;
+  width: 18px;
+  height: 18px;
+  background: #b6ff5a;
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(128, 190, 39, 0.6);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { box-shadow: 0 0 0 0 rgba(128, 190, 39, 0.6); }
+  70% { box-shadow: 0 0 0 12px rgba(128, 190, 39, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(128, 190, 39, 0); }
+}
+
+.welcome-title {
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.welcome-subtitle {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--ink-soft);
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
+
+/* Botones */
+.welcome-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.welcome-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: var(--white);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+}
+
+.welcome-btn:hover, .welcome-btn:focus-visible {
+  border-color: var(--iberdrola-green);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(128, 190, 39, 0.2);
+  outline: none;
+}
+
+.welcome-btn:hover .welcome-btn-arrow {
+  transform: translateX(4px);
+  color: var(--iberdrola-green-dark);
+}
+
+.welcome-btn-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--iberdrola-green-soft);
+  border-radius: 12px;
+}
+
+.welcome-btn-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.welcome-btn-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.welcome-btn-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.welcome-btn-arrow {
+  font-size: 22px;
+  color: var(--ink-soft);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+/* ====== PANTALLA 2: CHAT ====== */
 .chat-wrapper {
   flex: 1;
   display: flex;
@@ -75,7 +238,10 @@ html, body {
   padding: clamp(12px, 2vw, 32px);
   min-height: 0;
   overflow: hidden;
+  animation: fadeIn 0.4s ease-out;
 }
+
+.chat-wrapper[hidden] { display: none; }
 
 .chat {
   width: 100%;
@@ -91,15 +257,33 @@ html, body {
   border: 1px solid var(--line);
 }
 
-/* ====== Cabecera del chat ====== */
 .chat-header {
   display: flex;
   align-items: center;
+  gap: 12px;
   padding: 16px 20px;
   background: linear-gradient(135deg, var(--iberdrola-green) 0%, var(--iberdrola-green-dark) 100%);
   color: white;
   flex-shrink: 0;
 }
+
+.back-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.back-btn:hover { background: rgba(255, 255, 255, 0.25); }
+.back-btn svg { width: 18px; height: 18px; }
 
 .chat-header-info h2 {
   font-size: 16px;
@@ -107,7 +291,7 @@ html, body {
   letter-spacing: -0.2px;
 }
 
-/* ====== Mensajes ====== */
+/* Mensajes */
 .messages {
   flex: 1;
   overflow-y: auto;
@@ -166,9 +350,7 @@ html, body {
 }
 
 .message.user a { color: white; }
-
 .message strong { font-weight: 600; }
-
 .message ul { margin: 8px 0 4px 18px; }
 .message li { margin: 4px 0; }
 
@@ -199,7 +381,7 @@ html, body {
   30% { transform: translateY(-6px); opacity: 1; }
 }
 
-/* ====== Accesos rápidos ====== */
+/* Accesos rápidos */
 .shortcuts {
   display: flex;
   gap: 8px;
@@ -236,7 +418,7 @@ html, body {
   box-shadow: 0 4px 12px rgba(128, 190, 39, 0.3);
 }
 
-/* ====== Caja de entrada ====== */
+/* Caja de entrada */
 .input-bar {
   display: flex;
   gap: 10px;
@@ -298,14 +480,11 @@ html, body {
     border: none;
     box-shadow: none;
   }
+  .welcome-btn { padding: 14px 16px; }
+  .welcome-btn-icon { width: 42px; height: 42px; font-size: 24px; }
 }
 
-/* ====== Tótem vertical: pantallas muy altas y estrechas ====== */
-@media (min-aspect-ratio: 9/16) and (max-width: 900px) {
-  .chat { max-height: 100%; }
-}
-
-/* ====== Pantallas grandes: centra y limita ====== */
+/* ====== Pantallas grandes ====== */
 @media (min-width: 1200px) {
   .chat { max-width: 520px; max-height: 800px; }
 }

@@ -97,7 +97,7 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: clamp(12px, 2vw, 32px);
-  min-height: 0; /* permite que el hijo se encoja */
+  min-height: 0;
   overflow: hidden;
 }
 
